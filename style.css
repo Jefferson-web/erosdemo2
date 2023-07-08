@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap");
+
+:root {
+    /* Colors */
+    --brand-color: hsl(46, 100%, 50%);
+    --black: hsl(0, 0%, 0%);
+    --white: hsl(0, 0%, 100%);
+    /* Fonts */
+    --font-title: "Montserrat", sans-serif;
+    --font-text: "Lato", sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto;
+}
+
+body {
+    background: #0D0D0D;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h2,
+p {
+    margin: 0;
+}
+
+h2 {
+    font-size: 2rem;
+    font-family: var(--font-title);
+    color: var(--white);
+    line-height: 1.1;
+}
+
+p {
+    font-family: var(--font-text);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--white);
+}
+
+.card {
+    width: 14rem;
+    height: 20rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card>* {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.card .card-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card .card-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 500ms all ease-in;
+    aspect-ratio: 2/3;
+}
+
+.card-image img.active {
+    opacity: 1;
+}
+
+.card .card-content {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: flex-end;
+    background: linear-gradient(180deg,
+            hsla(0, 0%, 0%, 0) 0%,
+            hsla(0, 0%, 0%, 0.3) 10%,
+            hsl(0, 0%, 0%) 100%);
+    transform: translateY(80%);
+    padding: 0px 1.25rem 1.875rem;
+    transition: .5s transform ease-in-out;
+}
+
+.card-title {
+    position: relative;
+    width: fit-content;
+    height: 20%;
+}
+
+.card-description {
+    position: relative;
+    width: fit-content;
+}
+
+.card-button {
+    padding: 0.75em 1.6em;
+    width: fit-content;
+    width: -moz-fit-content;
+    font-variant: small-caps;
+    font-weight: bold;
+    border-radius: 0.45em;
+    border: none;
+    background-color: var(--brand-color);
+    font-family: var(--font-title);
+    font-size: 1.125rem;
+    color: var(--black);
+}
+
+.card-title::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -1.875rem;
+    width: 0px;
+    height: 5px;
+    background-color: var(--brand-color);
+    transition: all 500ms;
+    opacity: 0;
+}
+
+
+
+.ribbon-container {
+    position: absolute;
+    top: -.8rem;
+    left: -.8rem;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    z-index: 2;
+    transition: .5s opacity ease-in-out;
+}
+
+.ribbon-container .ribbon-vip {
+    position: absolute;
+    font-size: .8rem;
+    width: 145%;
+    height: 1.4rem;
+    background-color: orange;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-45deg) translateY(-1.5rem);
+}
+
+.ribbon-container .ribbon-verificada {
+    position: absolute;
+    font-size: .8rem;
+    width: 180%;
+    height: 1.4rem;
+    background-color: blueviolet;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-45deg) translateY(.1rem);
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 5px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+
+    h2.card-title {
+        font-size: 1.2rem;
+        line-height: 2;
+    }
+
+    .card:hover .card-content {}
+
+    .card:hover .card-image img {}
+}
+
+@media (min-width: 500px) {
+    .card:hover .card-content {
+        transform: translateY(0%);
+    }
+
+    .card:hover .card-image img {
+        transform: scale(1.1)
+    }
+    
+    .card:hover .card-title::after {
+        width: 120%;
+        opacity: 1;
+        transition: opacity 500ms ease-in, width 500ms ease-out;
+        transition-delay: 500ms;
+        transform-origin: right;
+    }
+}
+
+
+.card:hover .ribbon-container {
+    opacity: 0;
+}
